@@ -57,8 +57,12 @@ const AdminPage: React.FC = () => {
   const handleAddService = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const addedService = await createService(newService);
-      setServices([...services, addedService]);
+      await createService(newService); // Ajoute le service à l'API
+  
+      // Recharge la liste des services en récupérant les données à jour depuis l'API
+      const updatedServices = await getService();
+      setServices(updatedServices); 
+  
       setShowForm(false);
       setNewService({ idService: 0, service: "" });
       notify("Service ajouté avec succès", "success");
@@ -66,6 +70,9 @@ const AdminPage: React.FC = () => {
       notify("Erreur lors de l'ajout du service", "error");
     }
   };
+  
+  
+  
 
   return (
     <div className="mt-20 flex flex-col items-center justify-center">

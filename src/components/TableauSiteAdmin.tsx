@@ -1,63 +1,29 @@
-import React, { useState, useEffect } from "react";
-import { notify } from "../pages/Login";
-
-export interface Site {
-  villeID: number;
-  ville: string;
-}
+import React from "react";
+import { Site } from "../models/salarieModel";
 
 interface SiteTableProps {
-  fetchSites: () => Promise<Site[]>;
-  updateSite: (site: Site) => Promise<void>;
-  deleteSite: (villeID: number) => Promise<void>;
+  sites: Site[];
+  handleChange: (villeID: number, field: string, value: string) => void;
+  handleUpdate: (site: Site) => void;
+  handleDelete: (villeID: number) => void;
 }
 
-const SiteTable: React.FC<SiteTableProps> = ({ fetchSites, updateSite, deleteSite }) => {
-  const [sites, setSites] = useState<Site[]>([]);
-
-  useEffect(() => {
-    const loadSites = async () => {
-      const data = await fetchSites();
-      setSites(data);
-    };
-    loadSites();
-  }, []);
-
-  const handleChange = (villeID: number, field: string, value: string | number) => {
-    const updatedSites = sites.map(site =>
-      site.villeID === villeID ? { ...site, [field]: value } : site
-    );
-    setSites(updatedSites);
-  };
-
-  const handleUpdate = async (site: Site) => {
-    await updateSite(site);
-  };
-
-  const handleDelete = async (villeID: number) => {
-    try {
-      await deleteSite(villeID);
-      setSites(sites.filter(site => site.villeID !== villeID));
-    } catch (error) {
-      notify("Impossible de supprimer le site : un service est associé.", "error");
-    }
-  };
-
+const TableauSiteAdmin: React.FC<SiteTableProps> = ({ sites, handleChange, handleUpdate, handleDelete }) => {
   return (
     <div className="overflow-x-auto w-full">
-      <table className="min-w-full bg-white border">
+      <table className="min-w-full bg-white border mt-4">
         <thead>
           <tr>
-            <th className="border px-4 py-2 min-w-[100px]">Ville ID</th>
-            <th className="border px-4 py-2 min-w-[100px]">Ville</th>
-            <th className="border px-4 py-2 min-w-[100px]">Actions</th>
+            <th className="border px-4 py-2">ID Ville</th>
+            <th className="border px-4 py-2">Nom Ville</th>
+            <th className="border px-4 py-2">Actions</th>
           </tr>
         </thead>
         <tbody>
           {sites.map(site => (
             <tr key={site.villeID}>
-              <td className="border px-4 py-2 min-w-[100px]">{site.villeID}</td>
-              <td className="border px-4 py-2 min-w-[100px]">
+              <td className="border px-4 py-2">{site.villeID}</td>
+              <td className="border px-4 py-2">
                 <input
                   type="text"
                   value={site.ville}
@@ -65,7 +31,7 @@ const SiteTable: React.FC<SiteTableProps> = ({ fetchSites, updateSite, deleteSit
                   className="w-full p-1 border rounded"
                 />
               </td>
-              <td className="border px-4 py-2 flex justify-start space-x-2 min-w-[100px]">
+              <td className="border px-4 py-2 flex justify-start space-x-2">
                 <button
                   onClick={() => handleUpdate(site)}
                   className="bg-gray-300 text-black px-2 py-1 rounded hover:bg-gray-500 hover:text-white"
@@ -87,4 +53,4 @@ const SiteTable: React.FC<SiteTableProps> = ({ fetchSites, updateSite, deleteSit
   );
 };
 
-export default SiteTable;
+export default TableauSiteAdmin;
