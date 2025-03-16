@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { register } from "../services/authentification";
+import { getTokenFromCookie, register } from "../services/authentification";
 import { toast } from "react-toastify";
 
 const RegisterAdmin = () => {
@@ -10,6 +10,14 @@ const RegisterAdmin = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+      const token = getTokenFromCookie();
+      if (!token) {
+        navigate("/");
+        notify("Vous n'avez pas accès à cette page", "error");
+      }
+    }, [navigate]);
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
