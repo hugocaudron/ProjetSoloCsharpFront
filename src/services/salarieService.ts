@@ -2,7 +2,7 @@ import { Salarie } from "../models/salarieModel";
 import { getTokenFromCookie } from "./authentification";
 
 const API_URL = process.env.REACT_APP_API_BASE_URL;
-
+// Récupérer les salariés
 export const getSalaries = async (): Promise<Salarie[]> => {
   try {
     const token = getTokenFromCookie();
@@ -23,7 +23,7 @@ export const getSalaries = async (): Promise<Salarie[]> => {
     throw error;
   }
 };
-
+// Ajouter un salarié
 export const createSalarie = async (newSalarie: Salarie): Promise<Salarie> => {
   const token = getTokenFromCookie();
 
@@ -48,7 +48,7 @@ export const createSalarie = async (newSalarie: Salarie): Promise<Salarie> => {
     throw error;
   }
 };
-
+// Mettre à jour un salarié
 export const updateSalarie = async (salarie: Salarie): Promise<void> => {
   const token = getTokenFromCookie();
 
@@ -70,7 +70,7 @@ export const updateSalarie = async (salarie: Salarie): Promise<void> => {
     throw error;
   }
 };
-
+// Supprimer un salarié
 export const deleteSalarie = async (idSalary: number): Promise<void> => {
   const token = getTokenFromCookie();
 

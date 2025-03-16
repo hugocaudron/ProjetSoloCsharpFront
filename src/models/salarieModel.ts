@@ -1,3 +1,4 @@
+//salarie model
 export interface Salarie {
   idSalary: number;
   nom: string;
@@ -10,12 +11,12 @@ export interface Salarie {
   site: Site;
   service: Service;
 }
-
+//site model
 export interface Site {
   villeID: number;
   ville: string;
 }
-
+//service model
 export interface Service {
   idService: number;
   service: string;

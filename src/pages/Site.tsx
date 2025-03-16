@@ -12,6 +12,7 @@ const AdminPage: React.FC = () => {
   const [showForm, setShowForm] = useState(false);
   const [newSite, setNewSite] = useState<Site>({ villeID: 0, ville: "" });
 
+  //regarde si l'utilisateur est connecté
   useEffect(() => {
     const token = getTokenFromCookie();
     if (!token) {
@@ -20,6 +21,7 @@ const AdminPage: React.FC = () => {
     }
   }, [navigate]);
 
+  //charge les sites
   useEffect(() => {
     const loadSites = async () => {
       const sitesData = await getSite();
@@ -28,6 +30,7 @@ const AdminPage: React.FC = () => {
     loadSites();
   }, []);
 
+  //modifie les sites
   const handleChange = (villeID: number, field: string, value: string) => {
     const updatedSites = sites.map(site =>
       site.villeID === villeID ? { ...site, [field]: value } : site
@@ -35,6 +38,7 @@ const AdminPage: React.FC = () => {
     setSites(updatedSites);
   };
 
+  //met à jour les sites
   const handleUpdate = async (site: Site) => {
     try {
       await updateSite(site);
@@ -48,6 +52,7 @@ const AdminPage: React.FC = () => {
     }
   };
 
+  //supprime les sites
   const handleDelete = async (villeID: number) => {
     try {
       await deleteSite(villeID);
@@ -62,6 +67,7 @@ const AdminPage: React.FC = () => {
     }
   };
 
+  //ajoute un site
   const handleAddSite = async (e: React.FormEvent) => {
     e.preventDefault();
     try {

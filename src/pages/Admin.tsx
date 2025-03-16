@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 const AdminPage: React.FC = () => {
   const navigate = useNavigate();
 
+  // Vérifier si l'utilisateur est connecté
   useEffect(() => {
     const token = getTokenFromCookie();
 

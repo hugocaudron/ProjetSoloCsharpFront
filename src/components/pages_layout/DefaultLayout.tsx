@@ -5,10 +5,12 @@ interface DefaultLayoutProps {
   children: ReactNode;
 }
 
+//ajoue du header dans toute les pages
+
 const DefaultLayout: FC<DefaultLayoutProps> = ({ children }) => {
   return (
     <>
-      <Header />
+      <Header /> 
       {children}
       
     </>

@@ -2,7 +2,7 @@ import { Service } from "../models/salarieModel";
 import { getTokenFromCookie } from "./authentification";
 
 const API_URL = process.env.REACT_APP_API_BASE_URL;
-
+// Récupérer les services
 export const getService = async (): Promise<Service[]> => {
   try {
     const token = getTokenFromCookie();
@@ -22,7 +22,7 @@ export const getService = async (): Promise<Service[]> => {
     throw error;
   }
 };
-
+// Ajouter un service
 export const createService = async (newService: Service): Promise<Service> => {
   const token = getTokenFromCookie();
 
@@ -49,7 +49,7 @@ export const createService = async (newService: Service): Promise<Service> => {
   }
 };
 
-
+// Mettre à jour un service
 export const updateService = async (service: Service): Promise<void> => {
   const token = getTokenFromCookie();
 
@@ -71,7 +71,7 @@ export const updateService = async (service: Service): Promise<void> => {
     throw error;
   }
 };
-
+// Supprimer un service
 export const deleteService = async (idService: number): Promise<void> => {
   const token = getTokenFromCookie();
 

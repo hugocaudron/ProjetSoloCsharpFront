@@ -2,7 +2,7 @@ import { Site } from "../models/salarieModel";
 import { getTokenFromCookie } from "./authentification";
 
 const API_URL = process.env.REACT_APP_API_BASE_URL;
-
+// Récupérer les sites
 export const getSite = async (): Promise<Site[]> => {
   try {
     const response = await fetch(`${API_URL}/sites`);
@@ -18,7 +18,7 @@ export const getSite = async (): Promise<Site[]> => {
     throw error;
   }
 };
-
+// Ajouter un site
 export const createSite = async (site: {
   villeID: number;
   ville: string;
@@ -43,7 +43,7 @@ export const createSite = async (site: {
     throw error;
   }
 };
-
+// Mettre à jour un site
 export const updateSite = async (site: Site): Promise<void> => {
   const token = getTokenFromCookie();
 
@@ -67,7 +67,7 @@ export const updateSite = async (site: Site): Promise<void> => {
     throw error;
   }
 };
-
+// Supprimer un service
 export const deleteSite = async (villeID: number): Promise<void> => {
   const token = getTokenFromCookie();
 

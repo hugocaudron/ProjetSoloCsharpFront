@@ -10,7 +10,7 @@ const RegisterAdmin = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
-
+// Vérifier si l'utilisateur est connecté
   useEffect(() => {
       const token = getTokenFromCookie();
       if (!token) {
@@ -19,6 +19,7 @@ const RegisterAdmin = () => {
       }
     }, [navigate]);
 
+    //Vérifie si le mot de passe et le bon des deux côtés
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
@@ -26,15 +27,16 @@ const RegisterAdmin = () => {
       return;
     }
 
+    // Créer un nouvel admin
     setIsLoading(true);
     const isRegistered = await register({ email, password, confirmPassword });
     setIsLoading(false);
 
     if (isRegistered) {
-      notify("Admin créé avec succès !", "success");
+      notify("Admin créé avec succès !", "success"); //création admin
       navigate("/");
     } else {
-      notify("Erreur lors de la création de l'admin.", "error");
+      notify("Erreur lors de la création de l'admin.", "error"); //erreur de création
     }
   };
 

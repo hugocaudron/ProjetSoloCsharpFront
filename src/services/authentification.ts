@@ -3,6 +3,7 @@ import { AdminLogin, AdminRegister } from "../models/authentificationModel";
 
 const API_URL = process.env.REACT_APP_API_BASE_URL;
 
+// Enregistrement d'un nouvel administrateur
 export const register = async ({
   email,
   password,
@@ -30,6 +31,7 @@ export const register = async ({
   }
 };
 
+// Connexion d'un administrateur
 export const login = async ({
   email,
   password,
@@ -64,6 +66,7 @@ export const login = async ({
   }
 };
 
+// Récupérer les informations du token stocké dans les cookies
 export const getTokenFromCookie = (): any => {
   const cookies = document.cookie.split("; ");
   const tokenCookie = cookies.find((row) => row.startsWith("token="));
@@ -82,7 +85,7 @@ export const getInfoFromToken = (): any => {
   }
   return null;
 };
-
+// Déconnexion de l'administrateur
 export const logOut = () => {
   document.cookie = "token=; path=/; max-age=0;";
   sessionStorage.clear();

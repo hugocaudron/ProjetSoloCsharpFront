@@ -10,6 +10,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  // Connexion à l'application
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -17,7 +18,7 @@ const Login = () => {
     setIsLoading(false);
     if (isLoggedIn) {
       navigate("/");
-      notify("Vous nous aviez manqué !", "success");
+      notify("Vous êtes bien connecter !", "success");
     } else {
       notify("Adresse mail ou mot de passe incorrect.", "error");
     }

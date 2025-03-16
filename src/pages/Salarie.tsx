@@ -6,6 +6,7 @@ import { Salarie, Service, Site } from "../models/salarieModel";
 import { getTokenFromCookie } from "../services/authentification";
 import { useNavigate } from "react-router-dom";
 
+// Page d'administration des salariés
 const AdminPageSalarie: React.FC = () => {
   const navigate = useNavigate();
   const [salaries, setSalaries] = useState<Salarie[]>([]);
@@ -25,6 +26,7 @@ const AdminPageSalarie: React.FC = () => {
   const [services, setServices] = useState<Service[]>([]);
   const [sites, setSites] = useState<Site[]>([]);
 
+  // Vérifier si l'utilisateur est connecté
   useEffect(() => {
     const token = getTokenFromCookie();
     if (!token) {
@@ -50,6 +52,7 @@ const AdminPageSalarie: React.FC = () => {
     loadData();
   }, []);
 
+  // Récupérer les services
   const fetchServices = async (): Promise<Service[]> => {
     const token = getTokenFromCookie();
     const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/services`, {
@@ -61,6 +64,7 @@ const AdminPageSalarie: React.FC = () => {
     return await response.json();
   };
 
+  // Récupérer les sites
   const fetchSites = async (): Promise<Site[]> => {
     const token = getTokenFromCookie();
     const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/sites`, {
@@ -72,6 +76,7 @@ const AdminPageSalarie: React.FC = () => {
     return await response.json();
   };
 
+  // Mettre à jour un salarié
   const handleChange = (idSalary: number, field: string, value: any) => {
     const updatedSalaries = salaries.map(salarie =>
       salarie.idSalary === idSalary ? { ...salarie, [field]: value } : salarie
@@ -79,6 +84,7 @@ const AdminPageSalarie: React.FC = () => {
     setSalaries(updatedSalaries);
   };
 
+  // Mettre à jour un salarié
   const handleUpdate = async (salarie: Salarie) => {
     try {
       await updateSalarie(salarie);
@@ -88,6 +94,7 @@ const AdminPageSalarie: React.FC = () => {
     }
   };
 
+  // Supprimer un salarié
   const handleDelete = async (idSalary: number) => {
     try {
       await deleteSalarie(idSalary);
@@ -98,6 +105,7 @@ const AdminPageSalarie: React.FC = () => {
     }
   };
 
+  // Ajouter un salarié
   const handleAddSalarie = async (e: React.FormEvent) => {
     e.preventDefault();
     try {

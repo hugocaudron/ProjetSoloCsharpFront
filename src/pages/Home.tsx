@@ -17,6 +17,7 @@ const Home: React.FC = () => {
   const [selectedSite, setSelectedSite] = useState<string>("");
   
 
+  // Récupérer les salariés, les sites et les services
   useEffect(() => {
     const fetchSalaries = async () => {
       try {
@@ -30,6 +31,7 @@ const Home: React.FC = () => {
       }
     };
 
+    // Récupérer les sites
     const fetchSites = async () => {
       try {
         const data = await getSite();
@@ -39,6 +41,7 @@ const Home: React.FC = () => {
       }
     };
 
+    // Récupérer les services
     const fetchServices = async () => {
       try {
         const data = await getService();
@@ -53,6 +56,7 @@ const Home: React.FC = () => {
     fetchServices();
   }, []);
 
+  // ouverture de la page de connexion avec cette suite de caractères
   useEffect(() => {
     const sequence = ["ArrowLeft", "ArrowUp", "ArrowRight", "ArrowDown"];
     let currentIndex = 0;
@@ -73,6 +77,7 @@ const Home: React.FC = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  // Filtrer les salariés
   const filteredSalaries = salaries.filter((salarie) => {
     return (
       (!search ||
@@ -111,7 +116,7 @@ const Home: React.FC = () => {
             </option>
           ))}
         </select>
-
+          
         <select
           value={selectedService}
           onChange={(e) => setSelectedService(e.target.value)}

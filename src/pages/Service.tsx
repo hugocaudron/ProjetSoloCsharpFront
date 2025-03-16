@@ -12,6 +12,7 @@ const AdminPage: React.FC = () => {
   const [showForm, setShowForm] = useState(false);
   const [newService, setNewService] = useState<Service>({ idService: 0, service: "" });
 
+  // Vérifie si l'utilisateur est connecté
   useEffect(() => {
     const token = getTokenFromCookie();
     if (!token) {
@@ -20,6 +21,7 @@ const AdminPage: React.FC = () => {
     }
   }, [navigate]);
 
+  // Charge les services
   useEffect(() => {
     const loadServices = async () => {
       const servicesData = await getService();
@@ -28,6 +30,7 @@ const AdminPage: React.FC = () => {
     loadServices();
   }, []);
 
+  // Modifie les services
   const handleChange = (idService: number, field: string, value: string) => {
     const updatedServices = services.map(service =>
       service.idService === idService ? { ...service, [field]: value } : service
@@ -35,6 +38,7 @@ const AdminPage: React.FC = () => {
     setServices(updatedServices);
   };
 
+  // Met à jour les services
   const handleUpdate = async (service: Service) => {
     try {
       await updateService(service);
@@ -44,6 +48,7 @@ const AdminPage: React.FC = () => {
     }
   };
 
+  // Supprime les services
   const handleDelete = async (idService: number) => {
     try {
       await deleteService(idService);
@@ -54,6 +59,7 @@ const AdminPage: React.FC = () => {
     }
   };
 
+  // Ajoute un service
   const handleAddService = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
