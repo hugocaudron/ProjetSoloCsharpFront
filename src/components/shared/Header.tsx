@@ -15,7 +15,7 @@ const Header = () => {
           window.location.pathname === "/admin" ? (
             <button 
               onClick={() => {
-                logOut();
+                logOut(); //se déconnecte voir service authentification
                 navigate("/login");
               }} 
               className="text-lg font-semibold"

@@ -14,17 +14,13 @@ const Router = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path='/' element={<DefaultLayout> <Home/> </DefaultLayout>}/>
-                <Route path='/login' element={<DefaultLayout> <Login/> </DefaultLayout>}/>
-                <Route path='/admin' element={<DefaultLayout> <Admin/> </DefaultLayout>}/>
-                <Route path='/site' element={<DefaultLayout> <Site/> </DefaultLayout>}/>
-                <Route path='/service' element={<DefaultLayout> <Service/> </DefaultLayout>}/>
-                <Route path='/salarie' element={<DefaultLayout> <Salarie/> </DefaultLayout>}/>
-                <Route path='/createAdmin' element={<DefaultLayout> <CreateAdmin/> </DefaultLayout>}/>
-
-
-
-
+                <Route path='/' element={<DefaultLayout> <Home/> </DefaultLayout>}/>{/**page home */}
+                <Route path='/login' element={<DefaultLayout> <Login/> </DefaultLayout>}/>{/**page login */}
+                <Route path='/admin' element={<DefaultLayout> <Admin/> </DefaultLayout>}/>{/**page admin */}
+                <Route path='/site' element={<DefaultLayout> <Site/> </DefaultLayout>}/>{/**page site */}
+                <Route path='/service' element={<DefaultLayout> <Service/> </DefaultLayout>}/>{/**page service */}
+                <Route path='/salarie' element={<DefaultLayout> <Salarie/> </DefaultLayout>}/>{/**page salarie */}
+                <Route path='/createAdmin' element={<DefaultLayout> <CreateAdmin/> </DefaultLayout>}/>{/**page créer un admin */}
             </Routes>
         </BrowserRouter>
     );
