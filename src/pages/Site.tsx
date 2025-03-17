@@ -63,7 +63,7 @@ const AdminPage: React.FC = () => {
       
       notify("Site supprimé avec succès", "success");
     } catch (error) {
-      notify("Erreur lors de la suppression du site", "error");
+      notify("Impossible de supprimer un site : un salarié y est associé", "error");
     }
   };
 
